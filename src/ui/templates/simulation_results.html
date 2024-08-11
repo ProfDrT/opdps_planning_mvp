@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPDPS Simulation Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+        h1, h2 { color: #333; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <h1>OPDPS Simulation Results</h1>
+
+    <h2>Resource Allocations</h2>
+    <table>
+        <tr>
+            <th>Patient</th>
+            <th>Staff</th>
+            <th>Equipment</th>
+        </tr>
+        {% for allocation in allocations %}
+        <tr>
+            <td>{{ allocation.patient }}</td>
+            <td>{{ allocation.staff or 'N/A' }}</td>
+            <td>{{ allocation.equipment or 'N/A' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Daily Schedule</h2>
+    <table>
+        <tr>
+            <th>Time</th>
+            <th>Patient</th>
+            <th>Staff</th>
+            <th>Equipment</th>
+        </tr>
+        {% for appointment in schedule %}
+        <tr>
+            <td>{{ appointment.time }}</td>
+            <td>{{ appointment.patient }}</td>
+            <td>{{ appointment.staff or 'N/A' }}</td>
+            <td>{{ appointment.equipment or 'N/A' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Distributed Tasks</h2>
+    <table>
+        <tr>
+            <th>Task ID</th>
+            <th>Assigned To</th>
+        </tr>
+        {% for task in distributed_tasks %}
+        <tr>
+            <td>{{ task.task_id }}</td>
+            <td>{{ task.assigned_to or 'Unassigned' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>RL Model Action</h2>
+    <p>The RL model suggested action: {{ rl_action }}</p>
+</body>
+</html>
